@@ -32,8 +32,9 @@ project-task-management-api/
 │   ├── database.py  # DB connection setup
 │   ├── models.py  # SQLAlchemy models
 │   ├── schemas.py  # Pydantic schemas
-│   ├── auth.py  # Authentication handlers
+│   ├── auth.py  # Authentication Logic (JWT & Password Hashing)
 │   ├── env.py  # for importing all the Secrets form .env file 
+|   │── .gitignore # Ignore sensitive & unnecessary files
 │── tasks.db  # SQLite database
 │── requirements.txt
 │── README.md
@@ -43,23 +44,39 @@ project-task-management-api/
 
 ### 1.Clone the repository
 ```
-git clone 
-cd app
+git clone https://github.com/Alok5code/task-management-api.git
+cd task-management-api
 ```
 
 ### 2.Create and activate a virtual environment
 ```
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv venv   # Create virtual environment
+source venv/bin/activate  # Activate (Linux/Mac)
+venv\Scripts\activate  # Activate (Windows)
 ```
-### 3.Install dependencies
+### 3.Set Up the .env File
+```
+SECRET_KEY=your_secret_key_here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+DATABASE_URL=sqlite:///./tasks.db
+```
+### 4.Install dependencies
 ```
 pip install -r requirements.txt
 ```
-### 4.Run the FastAPI server
+### 5.Run the FastAPI server
 ```
 uvicorn app.main:app --reload
 ```
+### 6.Access API Documentation
+
+Once the server is running, open the Swagger UI:
+
+#### 🚀 Docs: http://127.0.0.1:8000/docs
+
+#### 📜 Redoc: http://127.0.0.1:8000/redoc
+
 
 
 ## 🔑 Authentication Endpoints
@@ -96,9 +113,20 @@ uvicorn app.main:app --reload
   "token_type": "bearer"
 }
 ```
+## 📋 Task Management Endpoints (JWT Protected)
 
-## 📌 Task Endpoints (Protected by JWT)
-- Include Authorization: Bearer <token> in headers
+| Method   | Endpoint           | Description       |
+| -------- | ------------------ | ----------------- |
+| `GET`    | `/tasks`           | Get all tasks     |
+| `POST`   | `/tasks`           | Create a task     |
+| `GET`    | `/tasks/{task_id}` | Get task by ID    |
+| `PUT`    | `/tasks/{task_id}` | Update task by ID |
+| `DELETE` | `/tasks/{task_id}` | Delete task by ID |
+
+## 🔹 Add the JWT token in the Authorization header for protected endpoints:
+```
+Authorization: Bearer YOUR_ACCESS_TOKEN
+```
 
 ### 3️⃣ Create Task (POST /tasks)
 - Request Body:
