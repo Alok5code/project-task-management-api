@@ -113,21 +113,6 @@ Once the server is running, open the Swagger UI:
   "token_type": "bearer"
 }
 ```
-## 📋 Task Management Endpoints (JWT Protected)
-
-| Method   | Endpoint           | Description       |
-| -------- | ------------------ | ----------------- |
-| `GET`    | `/tasks`           | Get all tasks     |
-| `POST`   | `/tasks`           | Create a task     |
-| `GET`    | `/tasks/{task_id}` | Get task by ID    |
-| `PUT`    | `/tasks/{task_id}` | Update task by ID |
-| `DELETE` | `/tasks/{task_id}` | Delete task by ID |
-
-## 🔹 Add the JWT token in the Authorization header for protected endpoints:
-```
-Authorization: Bearer YOUR_ACCESS_TOKEN
-```
-
 ### 3️⃣ Create Task (POST /tasks)
 - Request Body:
 
@@ -187,6 +172,20 @@ Authorization: Bearer YOUR_ACCESS_TOKEN
 - Response:
 ```
 {"message": "Task deleted successfully"}
+```
+## 📋 Task Management Endpoints (JWT Protected)
+
+| Method   | Endpoint           | Description       |
+| -------- | ------------------ | ----------------- |
+| `GET`    | `/tasks`           | Get all tasks     |
+| `POST`   | `/tasks`           | Create a task     |
+| `GET`    | `/tasks/{task_id}` | Get task by ID    |
+| `PUT`    | `/tasks/{task_id}` | Update task by ID |
+| `DELETE` | `/tasks/{task_id}` | Delete task by ID |
+
+## 🔹 Add the JWT token in the Authorization header for protected endpoints:
+```
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
 
 ## 🛠 Running Tests
