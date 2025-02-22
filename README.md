@@ -34,7 +34,8 @@ project-task-management-api/
 │   ├── schemas.py  # Pydantic schemas
 │   ├── auth.py  # Authentication Logic (JWT & Password Hashing)
 │   ├── env.py  # for importing all the Secrets form .env file 
-|   │── .gitignore # Ignore sensitive & unnecessary files
+|   ├── env.example # sample for .env file
+|── .gitignore # Ignore sensitive & unnecessary files
 │── tasks.db  # SQLite database
 │── requirements.txt
 │── README.md
@@ -82,30 +83,40 @@ Once the server is running, open the Swagger UI:
 ## 🔑 Authentication Endpoints
 
 ### 1️⃣ User Registration (POST /auth/register)
-- Request Body:
+### 🔹 Password Requirements:
+
+- Must have at least 8 characters
+
+- At least 1 uppercase letter
+
+- At least 1 number
+
+- At least 1 special character (@$!%*?&)
+
+- ### Request Body:
 
 ```
 {
   "username": "testuser",
-  "password": "securepassword"
+  "password": "Secure@123"
 }
 ```
-- Response:
+- ### Response:
 
 ```
 {"message": "User registered successfully"}
 ```
 
 ### 2️⃣ User Login (POST /auth/login)
-- Request Body:
+- ### Request Body:
 
 ```
 {
   "username": "testuser",
-  "password": "securepassword"
+  "password": "Secure@123"
 }
 ```
-- Response:
+- ### Response:
 
 ```
 {
@@ -114,7 +125,7 @@ Once the server is running, open the Swagger UI:
 }
 ```
 ### 3️⃣ Create Task (POST /tasks)
-- Request Body:
+- ### Request Body:
 
 ```
 {
@@ -123,7 +134,7 @@ Once the server is running, open the Swagger UI:
   "priority": "high"
 }
 ```
-- Response:
+- ### Response:
 
 ```
 {
@@ -136,7 +147,7 @@ Once the server is running, open the Swagger UI:
 ```
 ### 4️⃣ Get All Tasks (GET /tasks)
 
-- Response:
+- ### Response:
 ```
 [
   {
@@ -149,14 +160,14 @@ Once the server is running, open the Swagger UI:
 ]
 ```
 ### 5️⃣ Update Task (PUT /tasks/{task_id})
-- Request Body:
+- ### Request Body:
 
 ```
 {
   "status": "completed"
 }
 ```
-- Response:
+- ### Response:
 
 ```
 {
@@ -169,7 +180,7 @@ Once the server is running, open the Swagger UI:
 ```
 ### 6️⃣ Delete Task (DELETE /tasks/{task_id})
 
-- Response:
+- ### Response:
 ```
 {"message": "Task deleted successfully"}
 ```
