@@ -10,7 +10,11 @@ from .auth import (
     ACCESS_TOKEN_EXPIRE_MINUTES, get_current_user
 )
 
-app = FastAPI()
+app = FastAPI(
+    title="Task-Management-API",
+    description="A FastAPI-based Task Management API with JWT authentication",
+    version="1.0.0"
+)
 
 Base.metadata.create_all(bind=engine)
 
