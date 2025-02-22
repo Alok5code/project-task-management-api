@@ -1,17 +1,7 @@
-from pydantic import BaseModel, ConstrainedStr, validator
-from typing import Optional
+from pydantic import BaseModel, constr, field_validator
+from typing import Optional, Annotated
 from enum import Enum
 import re
-
-
-class TitleStr(ConstrainedStr):
-    min_length = 3
-    max_length = 100
-
-
-class UsernameStr(ConstrainedStr):
-    min_length = 3
-    max_length = 20
 
 
 class PriorityEnum(str, Enum):
@@ -27,7 +17,7 @@ class StatusEnum(str, Enum):
 
 
 class TaskCreate(BaseModel):
-    title: TitleStr
+    title: Annotated[str, constr(min_length=3, max_length=100)]
     description: Optional[str] = None
     priority: PriorityEnum
 
@@ -36,7 +26,7 @@ class TaskCreate(BaseModel):
 
 
 class TaskUpdate(BaseModel):
-    title: Optional[TitleStr] = None
+    title: Optional[Annotated[str, constr(min_length=3, max_length=100)]] = None
     description: Optional[str] = None
     status: Optional[StatusEnum] = None
     priority: Optional[PriorityEnum] = None
@@ -57,10 +47,10 @@ class TaskResponse(BaseModel):
 
 
 class UserCreate(BaseModel):
-    username: UsernameStr
+    username: Annotated[str, constr(min_length=3, max_length=20)] 
     password: str
 
-    @validator("password")
+    @field_validator("password")
     def validate_password(cls, value):
         if not re.match(r"^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$", value):
             raise ValueError(
