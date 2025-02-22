@@ -41,7 +41,9 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
             minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     )
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"message": "User registered successfully.",
+            "access_token": access_token, "token_type": "bearer"
+            }
 
 
 @app.post("/auth/login", response_model=Token)

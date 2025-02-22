@@ -104,7 +104,10 @@ Once the server is running, open the Swagger UI:
 - ### Response:
 
 ```
-{"message": "User registered successfully"}
+{   "message": "User registered successfully.",
+    "access_token": access_token,
+    "token_type": "bearer"
+}
 ```
 
 ### 2️⃣ User Login (POST /auth/login)
